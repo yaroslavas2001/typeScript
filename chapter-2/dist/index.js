@@ -7,9 +7,13 @@ let table = document.createElement("div");
 table.className = "table";
 let row = document.createElement("div");
 row.className = "row";
-for (let i = 0; i < 4; i++) {
+add("пирог");
+add("мороженное");
+add("пироженное");
+add("шокола");
+function add(name) {
     let cell = document.createElement("div");
-    var cellText = document.createTextNode("name");
+    var cellText = document.createTextNode(name);
     cell.appendChild(cellText);
     cell.className = "cell";
     row.appendChild(cell);
