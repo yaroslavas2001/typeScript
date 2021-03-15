@@ -1,62 +1,37 @@
-let t = document.getElementById("name")?.innerHTML;
-console.log(t)
-let element = document.getElementsByTagName("body")[0];
-let table = document.createElement("div");
-table.className = "table";
-let row = document.createElement("div");
-row.className = "row";
-add("пирог")
-add("мороженное")
-add("пироженное")
-add("шокола")
-
-class Add{
-    name : string;
-    constructor(name:string){
-        this.name = name;
-        console.log(this.name);
-    }
-}
-new Add("ffdfg");
-function add(name:string){
-    let cell= document.createElement("div");
-    var cellText = document.createTextNode(name);
-    cell.appendChild(cellText);
-    cell.className = "cell";
-    row.appendChild(cell);
-}
-table.appendChild(row);
-element.appendChild(table);
 
 
 class App{
-    element: object;
-    constructor(element:object){
-        this.element=element
-        this.Init(this.element);
+    root : HTMLElement;
+    table : HTMLDivElement;
+    row :  HTMLDivElement;
+    constructor(element:HTMLElement){
+        this.root=element;
+        this.row= document.createElement('div') as HTMLDivElement;
+        this.table= document.createElement('div') as HTMLDivElement;
+        this.Init();
     }
-    Init(element:object){
-        var element = element.appendChild(this._CreateTable);
+    Init(){
+       this.root.appendChild(this._CreateTable());
     }
     _CreateСap(name:string) {
-        var cell = document.createElement("div");
+        var cell = document.createElement("div") as HTMLDivElement;
         cell.className = "cell";
-        var cellText = document.createTextNode(name);
-        cell.appendChild(cellText);
-        row.appendChild(cell);
+        cell.textContent = name;
+        //var cellText = document.createTextNode(name);
+        //cell.appendChild(cellText);
+        this.row.appendChild(cell);
     }
-    // метод для создания таблицы
+            // метод для создания таблицы
     _CreateTable() {
-        var table = document.createElement("div");
-        table.className = "table";
-        var row = document.createElement("div")
-        row.className = "row";
+        this.table.className = "table";
+        this.row.className = "row";
         this._CreateСap("№");
         this._CreateСap("ФИО");
         this._CreateСap("Профессия");
         this._CreateСap("Действия");
-        table.appendChild(row);
-        return table;
-    }
+        this.table.appendChild(this.row);
+        return this.table;
+    }                    
 }
-new App(document.getElementsByTagName("body")[0]);
+
+new App(document.getElementsByTagName("body")[0] as HTMLBodyElement);

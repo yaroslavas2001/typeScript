@@ -1,13 +1,18 @@
 {
     "compilerOptions": {
-    "lib": ["dom", "es2015"],
-    "module": "commonjs", 
-    "outDir": "dist", 
-    "sourceMap": true, 
-    "strict": true, 
- "target": "es2015"
- },
- "include": [ 
- "src"
- ]
+        "lib": [
+            "dom",
+            "es2015"
+        ],
+        "module": "commonjs",
+        "outDir": "dist",
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2015"
+    },
+    "include": [
+        "src"
+    ]
 }
+//webpacke
+//https://habr.com/ru/post/514838/
