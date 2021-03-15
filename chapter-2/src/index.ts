@@ -9,6 +9,15 @@ add("пирог")
 add("мороженное")
 add("пироженное")
 add("шокола")
+
+class Add{
+    name : string;
+    constructor(name:string){
+        this.name = name;
+        console.log(this.name);
+    }
+}
+new Add("ffdfg");
 function add(name:string){
     let cell= document.createElement("div");
     var cellText = document.createTextNode(name);

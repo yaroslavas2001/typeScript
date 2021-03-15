@@ -11,6 +11,13 @@ add("пирог");
 add("мороженное");
 add("пироженное");
 add("шокола");
+class Add {
+    constructor(name) {
+        this.name = name;
+        console.log(this.name);
+    }
+}
+new Add("ffdfg");
 function add(name) {
     let cell = document.createElement("div");
     var cellText = document.createTextNode(name);
