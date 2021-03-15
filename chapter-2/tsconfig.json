@@ -2,16 +2,18 @@
     "compilerOptions": {
         "lib": [
             "dom",
-            "es2015"
+            "es2015",
+            "es5",
+            "es6"
         ],
         "module": "commonjs",
         "outDir": "dist",
         "sourceMap": true,
         "strict": true,
-        "target": "es2015"
+        "target": "es5"
     },
     "include": [
-        "src"
+        "src/**/*"
     ]
 }
 //webpacke

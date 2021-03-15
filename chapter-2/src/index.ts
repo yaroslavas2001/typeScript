@@ -1,18 +1,34 @@
 
+import  {formAdd } from "./formAdd";
+ 
 
 class App{
     root : HTMLElement;
     table : HTMLDivElement;
     row :  HTMLDivElement;
     constructor(element:HTMLElement){
+        console.log("gjh");
+        //напишу в formAdd и могу использовать тут
         this.root=element;
         this.row= document.createElement('div') as HTMLDivElement;
         this.table= document.createElement('div') as HTMLDivElement;
+
+        
         this.Init();
+        var d = new formAdd(element);
+        d.onAddEmplore = this.AddEmploer;
+    
     }
+
+
     Init(){
        this.root.appendChild(this._CreateTable());
     }
+
+    AddEmploer(name: string){
+        console.log(name);
+    }
+
     _CreateСap(name:string) {
         var cell = document.createElement("div") as HTMLDivElement;
         cell.className = "cell";
