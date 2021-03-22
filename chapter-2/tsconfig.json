@@ -5,8 +5,8 @@
       "noImplicitThis": true,//Аналогично, noImplicitAny но выдает ошибку с ключевым словом this 
       "noImplicitAny": true,   //Выдает ошибку в выражениях и объявлениях с подразумеваемым any типом.
       "noImplicitReturns":true,//выдает ошибку когда не все ветви кода возвращают результат
-      "module": "commonjs",// модуль генерации кода: "None", "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015"или "ESNext"
-      "target": "es5",    //целевая версию ECMAScript  
+      "module": "es2015",// модуль генерации кода: "None", "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015"или "ESNext"
+      "target": "es2015",    //целевая версию ECMAScript  
       "moduleResolution": "node",//тип импорта модулей (логика работы import from и required) http://www.typescriptlang.org/docs/handbook/module-resolution.html
       //"esModuleInterop": true,
       "lib": [//Список файлов библиотеки для включения в компиляцию.
