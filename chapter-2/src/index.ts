@@ -5,7 +5,6 @@ interface AddEmployer {
 }
 class Button {
     _btn: HTMLButtonElement;
-    // onclick: Function;
     constructor(name: string, clickHandler: () => any) {
         this._btn = document.createElement("button") as HTMLButtonElement;
         this._btn.textContent = name;
@@ -22,7 +21,7 @@ class TrDisplay {
     cell_number: HTMLDivElement;
     cell_fio: HTMLDivElement;
     cell_select: HTMLDivElement;
-    cell_actoin: HTMLDivElement;
+    cell_actions: HTMLDivElement;
     select: HTMLSelectElement;
     input:HTMLInputElement;
     constructor(index: number, name: string) {
@@ -56,13 +55,13 @@ class TrDisplay {
         //this.cell_select.innerHTML = String(this.index);
         this.row.appendChild(this.cell_select);
 
-        this.cell_actoin = document.createElement('div') as HTMLDivElement;
-        this.cell_actoin.className = "cell";
+        this.cell_actions = document.createElement('div') as HTMLDivElement;
+        this.cell_actions.className = "cell";
 
-        this.cell_actoin.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
 
-        this.row.appendChild(this.cell_actoin);
+        this.row.appendChild(this.cell_actions);
     }
     Edit(){
         this.input = document.createElement("input") as HTMLInputElement;
@@ -70,29 +69,28 @@ class TrDisplay {
         this.name=this.cell_fio.innerHTML;
         this.cell_fio.innerHTML="";
         this.cell_fio.appendChild(this.input);
-        this.cell_actoin.innerHTML="";
+        this.cell_actions.innerHTML="";
 
-        this.cell_actoin.appendChild(new Button("Save",this.Save.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Cansel",this.Cancel.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Save",this.Save.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Cansel",this.Cancel.bind(this)).BtnReturn());
     }
     Save(){
         this.cell_fio.innerHTML="";
         this.cell_fio.innerHTML=this.input.value;
-        this.cell_actoin.innerHTML="";
+        this.cell_actions.innerHTML="";
 
-        this.cell_actoin.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
     }
     Cancel(){
         this.cell_fio.innerHTML="";
         this.cell_fio.innerHTML=this.name;
-        this.cell_actoin.innerHTML="";
-        this.cell_actoin.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
+        this.cell_actions.innerHTML="";
+        this.cell_actions.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
     }
     Remove(){
         this.row.remove();
-        //alert("Remove");
     }
     GetElement() {
         return this.row

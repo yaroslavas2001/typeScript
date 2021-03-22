@@ -1,6 +1,5 @@
 "use strict";
 var Button = /** @class */ (function () {
-    // onclick: Function;
     function Button(name, clickHandler) {
         this._btn = document.createElement("button");
         this._btn.textContent = name;
@@ -39,11 +38,11 @@ var TrDisplay = /** @class */ (function () {
         this.cell_select.appendChild(this.select);
         //this.cell_select.innerHTML = String(this.index);
         this.row.appendChild(this.cell_select);
-        this.cell_actoin = document.createElement('div');
-        this.cell_actoin.className = "cell";
-        this.cell_actoin.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
-        this.row.appendChild(this.cell_actoin);
+        this.cell_actions = document.createElement('div');
+        this.cell_actions.className = "cell";
+        this.cell_actions.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
+        this.row.appendChild(this.cell_actions);
     }
     TrDisplay.prototype.Edit = function () {
         this.input = document.createElement("input");
@@ -51,27 +50,26 @@ var TrDisplay = /** @class */ (function () {
         this.name = this.cell_fio.innerHTML;
         this.cell_fio.innerHTML = "";
         this.cell_fio.appendChild(this.input);
-        this.cell_actoin.innerHTML = "";
-        this.cell_actoin.appendChild(new Button("Save", this.Save.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Cansel", this.Cancel.bind(this)).BtnReturn());
+        this.cell_actions.innerHTML = "";
+        this.cell_actions.appendChild(new Button("Save", this.Save.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Cansel", this.Cancel.bind(this)).BtnReturn());
     };
     TrDisplay.prototype.Save = function () {
         this.cell_fio.innerHTML = "";
         this.cell_fio.innerHTML = this.input.value;
-        this.cell_actoin.innerHTML = "";
-        this.cell_actoin.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
+        this.cell_actions.innerHTML = "";
+        this.cell_actions.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
     };
     TrDisplay.prototype.Cancel = function () {
         this.cell_fio.innerHTML = "";
         this.cell_fio.innerHTML = this.name;
-        this.cell_actoin.innerHTML = "";
-        this.cell_actoin.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
-        this.cell_actoin.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
+        this.cell_actions.innerHTML = "";
+        this.cell_actions.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
+        this.cell_actions.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
     };
     TrDisplay.prototype.Remove = function () {
         this.row.remove();
-        //alert("Remove");
     };
     TrDisplay.prototype.GetElement = function () {
         return this.row;
