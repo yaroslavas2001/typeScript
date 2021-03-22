@@ -5,13 +5,14 @@ interface AddEmployer {
 }
 class Button {
     _btn: HTMLButtonElement;
-    onclick: Function;
-    // как передать функцию?
-    constructor(text: string) {
+    // onclick: Function;
+    constructor(name: string, clickHandler: () => any) {
         this._btn = document.createElement("button") as HTMLButtonElement;
-        this._btn.textContent = text;
-        this._btn.onclick = onclick;
-        //return this._btn;
+        this._btn.textContent = name;
+        this._btn.onclick = clickHandler;
+    }
+    BtnReturn(){
+        return this._btn;
     }
 }
 class TrDisplay {
@@ -22,14 +23,17 @@ class TrDisplay {
     cell_fio: HTMLDivElement;
     cell_select: HTMLDivElement;
     cell_actoin: HTMLDivElement;
+    select: HTMLSelectElement;
+    input:HTMLInputElement;
     constructor(index: number, name: string) {
         this.index = index;
         this.name = name;
         this.row = document.createElement('div') as HTMLDivElement;
+        this.row.className = "row";
 
         this.cell_number = document.createElement('div') as HTMLDivElement;
         this.cell_number.className = "cell";
-        this.cell_number.innerHTML = String(index);
+        this.cell_number.innerHTML = String(this.index);
         this.row.appendChild(this.cell_number);
 
         this.cell_fio = document.createElement('div') as HTMLDivElement;
@@ -39,13 +43,56 @@ class TrDisplay {
 
         this.cell_select = document.createElement('div') as HTMLDivElement;
         this.cell_select.className = "cell";
-        this.cell_select.innerHTML = String(index);
+        this.select = document.createElement("select") as HTMLSelectElement;
+        let options = ["","Frontend", "Backend", "Designer", "Tester", "Manager"]; 
+        for(var i = 0; i < options.length; i++) {   
+            var opt = options[i];
+            var el = document.createElement("option");
+            el.textContent = opt;
+            el.value = opt;
+            this.select.appendChild(el)
+        }
+        this.cell_select.appendChild(this.select);
+        //this.cell_select.innerHTML = String(this.index);
         this.row.appendChild(this.cell_select);
 
         this.cell_actoin = document.createElement('div') as HTMLDivElement;
         this.cell_actoin.className = "cell";
-        this.cell_actoin.innerHTML = String(index);
+
+        this.cell_actoin.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
+        this.cell_actoin.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
+
         this.row.appendChild(this.cell_actoin);
+    }
+    Edit(){
+        this.input = document.createElement("input") as HTMLInputElement;
+        this.input.value = this.cell_fio.innerHTML;
+        this.name=this.cell_fio.innerHTML;
+        this.cell_fio.innerHTML="";
+        this.cell_fio.appendChild(this.input);
+        this.cell_actoin.innerHTML="";
+
+        this.cell_actoin.appendChild(new Button("Save",this.Save.bind(this)).BtnReturn());
+        this.cell_actoin.appendChild(new Button("Cansel",this.Cancel.bind(this)).BtnReturn());
+    }
+    Save(){
+        this.cell_fio.innerHTML="";
+        this.cell_fio.innerHTML=this.input.value;
+        this.cell_actoin.innerHTML="";
+
+        this.cell_actoin.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
+        this.cell_actoin.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
+    }
+    Cancel(){
+        this.cell_fio.innerHTML="";
+        this.cell_fio.innerHTML=this.name;
+        this.cell_actoin.innerHTML="";
+        this.cell_actoin.appendChild(new Button("Edit",this.Edit.bind(this)).BtnReturn());
+        this.cell_actoin.appendChild(new Button("Remove",this.Remove.bind(this)).BtnReturn());
+    }
+    Remove(){
+        this.row.remove();
+        //alert("Remove");
     }
     GetElement() {
         return this.row
@@ -63,22 +110,18 @@ class App {
         this.root = element;
         this.row = document.createElement('div') as HTMLDivElement;
         this.table = document.createElement('div') as HTMLDivElement;
-        console.log(1);
         this.Init();
         var d = new formAdd(element);
-        d.onAddEmployer = this.AddEmployer;
+        d.onAddEmployer = this.AddEmployer.bind(this);
     }
     Init() {
-        console.log(2);
         this.root.appendChild(this._CreateTable());
     }
     AddEmployer(name: string) {
-        // почему оно не видит this.table?
+        // почему оно не видит this.table и this.index?
         var display = new TrDisplay(this.index, name);
         this.index+=1;
-        console.log(5);
-        console.log(display.GetElement());
-        //this.table.appendChild(display.GetElement());
+        this.table.appendChild(display.GetElement());
         return this.table;
     }
 
@@ -96,8 +139,6 @@ class App {
         this._CreateСap("Профессия");
         this._CreateСap("Действия");
         this.table.appendChild(this.row);
-        console.log(3);
-        //localStorage.setItem("evpemrvmer","everver");
         return this.table;
     }
 }
@@ -122,7 +163,6 @@ class formAdd {
     }
     onClickAddPeople() {
         if (this.onAddEmployer) {
-            console.log(4);
             this.onAddEmployer(this.input.value);
             this.input.value = "";
         }
