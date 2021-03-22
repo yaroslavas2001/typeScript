@@ -1,94 +1,73 @@
-
-//import  {formAdd } from "./formAdd";
-interface AddEmployer {
-    (message: string): void;
-}
-class Button {
-    _btn: HTMLButtonElement;
-    onclick: Function;
+"use strict";
+var Button = /** @class */ (function () {
     // как передать функцию?
-    constructor(text: string) {
-        this._btn = document.createElement("button") as HTMLButtonElement;
+    function Button(text) {
+        this._btn = document.createElement("button");
         this._btn.textContent = text;
         this._btn.onclick = onclick;
         //return this._btn;
     }
-}
-class TrDisplay {
-    index: number;
-    name: string;
-    row: HTMLDivElement;
-    cell_number: HTMLDivElement;
-    cell_fio: HTMLDivElement;
-    cell_select: HTMLDivElement;
-    cell_actoin: HTMLDivElement;
-    constructor(index: number, name: string) {
+    return Button;
+}());
+var TrDisplay = /** @class */ (function () {
+    function TrDisplay(index, name) {
         this.index = index;
         this.name = name;
-        this.row = document.createElement('div') as HTMLDivElement;
-
-        this.cell_number = document.createElement('div') as HTMLDivElement;
+        this.row = document.createElement('div');
+        this.cell_number = document.createElement('div');
         this.cell_number.className = "cell";
         this.cell_number.innerHTML = String(index);
         this.row.appendChild(this.cell_number);
-
-        this.cell_fio = document.createElement('div') as HTMLDivElement;
+        this.cell_fio = document.createElement('div');
         this.cell_fio.className = "cell";
         this.cell_fio.innerHTML = name;
         this.row.appendChild(this.cell_fio);
-
-        this.cell_select = document.createElement('div') as HTMLDivElement;
+        this.cell_select = document.createElement('div');
         this.cell_select.className = "cell";
         this.cell_select.innerHTML = String(index);
         this.row.appendChild(this.cell_select);
-
-        this.cell_actoin = document.createElement('div') as HTMLDivElement;
+        this.cell_actoin = document.createElement('div');
         this.cell_actoin.className = "cell";
         this.cell_actoin.innerHTML = String(index);
         this.row.appendChild(this.cell_actoin);
     }
-    GetElement() {
-        return this.row
-    }
-
-}
-class App {
-    root: HTMLElement;
-    table: HTMLDivElement;
-    row: HTMLDivElement;
-    index : number;
-    constructor(element: HTMLElement) {
+    TrDisplay.prototype.GetElement = function () {
+        return this.row;
+    };
+    return TrDisplay;
+}());
+var App = /** @class */ (function () {
+    function App(element) {
         //напишу в formAdd и могу использовать тут
         this.index = 1;
         this.root = element;
-        this.row = document.createElement('div') as HTMLDivElement;
-        this.table = document.createElement('div') as HTMLDivElement;
+        this.row = document.createElement('div');
+        this.table = document.createElement('div');
         console.log(1);
         this.Init();
         var d = new formAdd(element);
         d.onAddEmployer = this.AddEmployer;
     }
-    Init() {
+    App.prototype.Init = function () {
         console.log(2);
         this.root.appendChild(this._CreateTable());
-    }
-    AddEmployer(name: string) {
+    };
+    App.prototype.AddEmployer = function (name) {
         // почему оно не видит this.table?
         var display = new TrDisplay(this.index, name);
-        this.index+=1;
+        this.index += 1;
         console.log(5);
         console.log(display.GetElement());
         //this.table.appendChild(display.GetElement());
         return this.table;
-    }
-
-    _CreateСap(name: string) {
-        var cell = document.createElement("div") as HTMLDivElement;
+    };
+    App.prototype._CreateСap = function (name) {
+        var cell = document.createElement("div");
         cell.className = "cell";
         cell.textContent = name;
         this.row.appendChild(cell);
-    }
-    _CreateTable() {
+    };
+    App.prototype._CreateTable = function () {
         this.table.className = "table";
         this.row.className = "row";
         this._CreateСap("№");
@@ -99,34 +78,31 @@ class App {
         console.log(3);
         //localStorage.setItem("evpemrvmer","everver");
         return this.table;
-    }
-}
-
-class formAdd {
-    root: HTMLElement;
-    input: HTMLInputElement;
-    btn: HTMLButtonElement;
-    onAddEmployer?: AddEmployer;
-    constructor(element: HTMLElement) {
+    };
+    return App;
+}());
+var formAdd = /** @class */ (function () {
+    function formAdd(element) {
         this.root = element;
-        this.input = document.createElement('input') as HTMLInputElement;
-        this.btn = document.createElement('button') as HTMLButtonElement;
+        this.input = document.createElement('input');
+        this.btn = document.createElement('button');
         this.Init();
     }
-    Init() {
+    formAdd.prototype.Init = function () {
         this.btn.classList.add('btn');
         this.btn.textContent = "Добавить";
         this.root.appendChild(this.input);
         this.btn.onclick = this.onClickAddPeople.bind(this);
         this.root.appendChild(this.btn);
-    }
-    onClickAddPeople() {
+    };
+    formAdd.prototype.onClickAddPeople = function () {
         if (this.onAddEmployer) {
             console.log(4);
             this.onAddEmployer(this.input.value);
             this.input.value = "";
         }
-    }
-}
-
-new App(document.getElementsByTagName("body")[0] as HTMLBodyElement);
+    };
+    return formAdd;
+}());
+new App(document.getElementsByTagName("body")[0]);
+//# sourceMappingURL=index.js.map
