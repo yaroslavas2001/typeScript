@@ -59,6 +59,7 @@ export class TrDisplay {
     }
     Remove() {
         this.row.remove();
+        localStorage.removeItem(this.cell_number.innerHTML);
     }
     GetElement() {
         return this.row;

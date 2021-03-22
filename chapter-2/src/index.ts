@@ -21,6 +21,7 @@ class App {
     }
     AddEmployer(name: string) {
         var display = new TrDisplay(this.index, name);
+        localStorage.setItem(String(this.index),name);
         this.index+=1;
         this.table.appendChild(display.GetElement());
         return this.table;
