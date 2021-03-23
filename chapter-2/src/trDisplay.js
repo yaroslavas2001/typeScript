@@ -1,6 +1,6 @@
 import { Button } from "./button.js";
 export class TrDisplay {
-    constructor(index, name) {
+    constructor(index, name, value) {
         this.index = index;
         this.name = name;
         this.row = document.createElement('div');
@@ -16,16 +16,17 @@ export class TrDisplay {
         this.cell_select = document.createElement('div');
         this.cell_select.className = "cell";
         this.select = document.createElement("select");
+        this.select.addEventListener("change", this.Select.bind(this));
         let options = ["", "Frontend", "Backend", "Designer", "Tester", "Manager"];
         for (var i = 0; i < options.length; i++) {
             var opt = options[i];
             var el = document.createElement("option");
             el.textContent = opt;
             el.value = opt;
+            el.selected = opt == value;
             this.select.appendChild(el);
         }
         this.cell_select.appendChild(this.select);
-        //this.cell_select.innerHTML = String(this.index);
         this.row.appendChild(this.cell_select);
         this.cell_actions = document.createElement('div');
         this.cell_actions.className = "cell";
@@ -47,6 +48,8 @@ export class TrDisplay {
         this.cell_fio.innerHTML = "";
         this.cell_fio.innerHTML = this.input.value;
         this.cell_actions.innerHTML = "";
+        var set = [this.cell_fio.innerHTML, this.select.value];
+        localStorage.setItem(this.cell_number.innerHTML, String(set));
         this.cell_actions.appendChild(new Button("Edit", this.Edit.bind(this)).BtnReturn());
         this.cell_actions.appendChild(new Button("Remove", this.Remove.bind(this)).BtnReturn());
     }
@@ -60,6 +63,10 @@ export class TrDisplay {
     Remove() {
         this.row.remove();
         localStorage.removeItem(this.cell_number.innerHTML);
+    }
+    Select() {
+        var set = [this.cell_fio.innerHTML, this.select.value];
+        localStorage.setItem(this.cell_number.innerHTML, String(set));
     }
     GetElement() {
         return this.row;
