@@ -1,4 +1,5 @@
 import { Button } from "./button.js";
+// класс для создания row с возможность удаления и изменения
 export class TrDisplay {
     constructor(index, name, value) {
         this.index = index;

@@ -5,7 +5,8 @@ export class Button {
         this._btn.textContent = name;
         this._btn.onclick = clickHandler;
     }
-    BtnReturn(){
+    BtnReturn() {
         return this._btn;
     }
 }
+// класс для создания кнопки

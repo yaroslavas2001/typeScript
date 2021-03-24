@@ -1,11 +1,13 @@
-import {TrDisplay} from "./trDisplay.js";
-import {formAdd} from "./formAdd.js";
-
+import { TrDisplay } from "./trDisplay.js";
+import { formAdd } from "./formAdd.js";
+// импорт испльзуемых классов
+// класс отвечающий за добавление новых людей, отображение сохраненных людей 
+//и создание шапки
 class App {
     root: HTMLElement;
     table: HTMLDivElement;
     row: HTMLDivElement;
-    index : number;
+    index: number;
     constructor(element: HTMLElement) {
         //напишу в formAdd и могу использовать тут
         this.index = 1;
@@ -20,29 +22,29 @@ class App {
         this.root.appendChild(this._CreateTable());
     }
     AddEmployer(name: string) {
-        if(localStorage.length>0){
+        if (localStorage.length > 0) {
             var map: { [key: string]: any } = {},
-            keys = Object.keys(localStorage),
-            i = keys.length;
+                keys = Object.keys(localStorage),
+                i = keys.length;
             var key = [];
-            for(var u=0;u<i;u++){
-                key[u]=parseInt(keys[u]);
+            for (var u = 0; u < i; u++) {
+                key[u] = parseInt(keys[u]);
             };
             key.sort(function (a, b) {
-                return a-b; 
+                return a - b;
             });
 
-            this.index=key[i-1]+1;
-            var display = new TrDisplay(this.index,name,"");
-            var people = [name,""];
-            localStorage.setItem(String(this.index),String(people));
+            this.index = key[i - 1] + 1;
+            var display = new TrDisplay(this.index, name, "");
+            var people = [name, ""];
+            localStorage.setItem(String(this.index), String(people));
             this.table.appendChild(display.GetElement());
             //return this.table;
-        }else{
-            var display = new TrDisplay(this.index, name,"");
-            var people = [name,""];
-            localStorage.setItem(String(this.index),String(people));
-            this.index+=1;
+        } else {
+            var display = new TrDisplay(this.index, name, "");
+            var people = [name, ""];
+            localStorage.setItem(String(this.index), String(people));
+            this.index += 1;
             this.table.appendChild(display.GetElement());
         }
     }
@@ -64,28 +66,28 @@ class App {
         this._OnLoad();
         return this.table;
     }
-    _OnLoad(){
-        if(localStorage.length>0){
+    _OnLoad() {
+        if (localStorage.length > 0) {
             var map: { [key: string]: any } = {},
-            keys = Object.keys(localStorage),
-            i = keys.length;
+                keys = Object.keys(localStorage),
+                i = keys.length;
             var key = [];
-            for(var u=0;u<i;u++){
-                key[u]=parseInt(keys[u]);
+            for (var u = 0; u < i; u++) {
+                key[u] = parseInt(keys[u]);
             };
             key.sort(function (a, b) {
-                return a-b; 
+                return a - b;
             });
-            for(var t=0;t<i;t++ ){
-                map[key[t]]=localStorage.getItem(String(key[t]));
+            for (var t = 0; t < i; t++) {
+                map[key[t]] = localStorage.getItem(String(key[t]));
             };
-            for (var j=0; j <i; j++) {
-                if(map[key[j]].split(",").length==2){
-                var display = new TrDisplay(key[j],map[key[j]].split(",")[0],map[key[j]].split(",")[1]);
-                this.table.appendChild(display.GetElement());
-                }else{
-                var display = new TrDisplay(key[j],map[key[j]].split(",")[0],"");
-                this.table.appendChild(display.GetElement());
+            for (var j = 0; j < i; j++) {
+                if (map[key[j]].split(",").length == 2) {
+                    var display = new TrDisplay(key[j], map[key[j]].split(",")[0], map[key[j]].split(",")[1]);
+                    this.table.appendChild(display.GetElement());
+                } else {
+                    var display = new TrDisplay(key[j], map[key[j]].split(",")[0], "");
+                    this.table.appendChild(display.GetElement());
                 }
             }
         }

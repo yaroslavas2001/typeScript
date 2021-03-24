@@ -8,4 +8,5 @@ export class Button {
         return this._btn;
     }
 }
+// класс для создания кнопки
 //# sourceMappingURL=button.js.map

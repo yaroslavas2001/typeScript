@@ -1,5 +1,8 @@
 import { TrDisplay } from "./trDisplay.js";
 import { formAdd } from "./formAdd.js";
+// импорт испльзуемых классов
+// класс отвечающий за добавление новых людей, отображение сохраненных людей 
+//и создание шапки
 class App {
     constructor(element) {
         //напишу в formAdd и могу использовать тут

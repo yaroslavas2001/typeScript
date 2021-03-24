@@ -1,7 +1,7 @@
 export interface AddEmployer {
     (message: string): void;
 }
-
+// класс отвечающий за принятие ФИО человека с помощью input и кнопки
 export class formAdd {
     root: HTMLElement;
     input: HTMLInputElement;
@@ -27,4 +27,3 @@ export class formAdd {
         }
     }
 }
-//this.root.appendChild(this.input);

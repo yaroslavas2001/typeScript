@@ -1,3 +1,4 @@
+// класс отвечающий за принятие ФИО человека с помощью input и кнопки
 export class formAdd {
     constructor(element) {
         this.root = element;
@@ -19,5 +20,4 @@ export class formAdd {
         }
     }
 }
-//this.root.appendChild(this.input);
 //# sourceMappingURL=formAdd.js.map
